@@ -172,9 +172,6 @@ A. I tend to agree with this advice, but it's still possible to end up with a
 
 I may well never do any of this but:
 
-- Suspect there is a bug where arrows are shown as bidirectional even when
-  they're not
-
 - Make the rules used to combine arrows controllable from command line.
   Possibly by entity type as well as just for all arrows?
 
