@@ -72,11 +72,19 @@ I hope that looking at these diagrams saves time and frustration when trying to
 understand test setup code, and perhaps even helps avoid bugs in production
 code.
 
-I use this together with just pretty-printing all my entities from a test.  The
-goal is to provide a way to sometimes tell more quickly that something is wrong,
-without providing quite as much information as a full dump of the object graph
-with all its python references and implicit string identifier relationships (see
-next section).  It's not intended to show you everything in full detail.
+The goal is to provide a way to sometimes tell more quickly that something is
+wrong, without providing quite as much information as a full dump of the object
+graph with all its python references and implicit string identifier
+relationships (see next section).  It's not intended to show you everything in
+full detail.
+
+## Advice
+
+Right now I find I mostly just pretty-print entities rather than looking at
+these charts, but they have sometimes been useful.  I recommend making
+pretty-printing very easy to do in your project: for example, you can add a
+pytest fixture that returns a no-arguments function that prints all entities
+created in your test.  PyPI module `prettyprinter` is good for this.
 
 ## Inferring arrows
 
