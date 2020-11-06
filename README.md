@@ -12,33 +12,36 @@ ImageMagick to display it.
 Here is the code to generate the diagram above:
 
 ```
-    class Parent:
-        def __init__(self, reference, children, pyref=None, matching=None, matching2=None):
-            self.reference = reference
-            self.children = children
-            self.pyref = pyref
-            self.matching = matching
-            self.matching2 = matching2
+    from typing import List, NamedTuple
 
+    class SaleOrder(NamedTuple):
+        reference: str
+        sku: str
+        lines: List[str]
 
-    class Child:
-        def __init__(self, id, matching=None):
-            self.id = id
-            self.matching = matching
+    class SaleOrderLine(NamedTuple):
+        name: str
+        quantity: str = 1
 
-    child1 = Child("child1")
-    child2 = Child("child2")
-    parent = Parent("ref", [child1, child2], pyref=child1)
+    class Product(NamedTuple):
+        sku: str
 
-    import fixturegraph
-    entities = [parent, child1, child2]
+    entities = [
+        SaleOrder(reference="123",
+                  sku="abc",
+                  lines=[SaleOrderLine("first"),
+                         SaleOrderLine("second")]),
+        Product(sku="abc")
+    ]
+
     config = fixturegraph.Configuration(
         id_attrs={
-            Parent: "reference",
-            Child: "id",
+            SaleOrder: "reference",
+            Product: "sku",
+            SaleOrderLine: "name",
         },
         attrs_with_child_refs={
-            Parent: ["children", "pyref"],
+            SaleOrder: ["lines"],
         },
     )
     fixturegraph.show_diagram(config, entities)
@@ -139,8 +142,9 @@ Here's a simple running example:
     )
     fixturegraph.show_diagram(config, entities)
 
-Here's an example showing how to use it in the form of a pytest fixture together
-with some common patterns used in DDD projects (Repository, Unit of Work):
+Here's an incomplete example showing how to use it in the form of a pytest
+fixture together with some common patterns used in DDD projects (Repository,
+Unit of Work):
 
     @pytest.fixture
     def dot(unit_of_work):
@@ -218,6 +222,11 @@ To run the tests, in the top level directory of the git project, run:
 ## To do
 
 I may well never do any of this but:
+
+- You have to specify an "id" even for things that in DDD terminology are non
+  aggregate roots -- here you can just provide a name rather than an id.  That's
+  weird and it could result in accidentally linking nodes that should not be
+  linked.
 
 - Make the rules used to combine arrows controllable from command line.
   Possibly by entity type as well as just for all arrows?
