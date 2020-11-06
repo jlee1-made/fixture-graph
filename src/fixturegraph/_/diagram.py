@@ -249,7 +249,7 @@ def make_index(arrows: List[Arrow]) -> Index:
                  by_undirected_src_dst_name_pairs=by_undirected_src_dst_name_pairs)
 
 
-def combine_arrows(rules, arrows_: List[Arrow]) -> List[DotArrow]:
+def combine_arrows(arrows_: List[Arrow]) -> List[DotArrow]:
     index = make_index(arrows_)
     r = []
 
@@ -309,20 +309,13 @@ def render_to_dot(nodes: List[Node], arrows: List[DotArrow]) -> List[str]:
     return dot
 
 
-def make_rules(config):
-    # I was thinking here it might be useful to explicitly represent and make
-    # configurable the rules used to combine Arrows into DotArrows
-    pass
-
-
 def make_nodes(config, entities):
     return [Node(slugify(entity_name(config.id_attrs, entity))) for entity in entities]
 
 
 def diagram(config, entities):
     arrows = make_arrows(config, entities)
-    rules = make_rules(config)
-    dot_arrows = combine_arrows(rules, arrows)
+    dot_arrows = combine_arrows(arrows)
     nodes = make_nodes(config, entities)
     return render_to_dot(nodes, dot_arrows)
 
