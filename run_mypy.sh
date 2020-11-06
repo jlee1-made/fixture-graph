@@ -1,3 +1,5 @@
+#!/bin/sh
+
 set -e
 
-mypy $(find src/ -name '*.py')
+exec mypy $(find src/ -name '*.py')
