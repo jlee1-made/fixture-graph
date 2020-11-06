@@ -66,7 +66,7 @@ def test_combining_inferred_arrows():
         Lozenge: "ref",
     }, )
 
-    arrows = combine_arrows("dummy", make_arrows(config, entities))
+    arrows = combine_arrows(make_arrows(config, entities))
     assert list(map(str, sorted(arrows))) == [
         "DotArrow(src='lozenge_1', dst='widget_1', "
         "label='lozenge<br/>part<br/>ref<br/>widget', bidirectional=True)",
@@ -74,8 +74,8 @@ def test_combining_inferred_arrows():
 
     dot = diagram(config, entities)
     assert dot == [
-        'Lozenge_1',
-        'Widget_1',
+        'lozenge_1',
+        'widget_1',
         'lozenge_1->widget_1 [ label= <lozenge<br/>part<br/>ref<br/>widget> dir="both" ]',
     ]
 
@@ -96,9 +96,9 @@ def test_combining_inferred_together_with_parent_child_arrows():
     )
     dot = diagram(config, entities)
     assert dot == [
-        'Child_child1',
-        'Child_child2',
-        'Parent_ref',
+        'child_child1',
+        'child_child2',
+        'parent_ref',
         'child_child1->parent_ref [ label= <matching> dir="both" ]',
         'parent_ref->child_child1 [ label= <children_0> ]',
         'parent_ref->child_child2 [ label= <children_1> ]',
@@ -122,9 +122,9 @@ def test_combining_multiple_inferred_together_with_parent_child_arrows():
     )
     dot = diagram(config, entities)
     assert dot == [
-        'Child_child1',
-        'Child_child2',
-        'Parent_ref',
+        'child_child1',
+        'child_child2',
+        'parent_ref',
         'child_child1->parent_ref [ label= <matching<br/>matching2> dir="both" ]',
         'parent_ref->child_child1 [ label= <children_0> ]',
         'parent_ref->child_child2 [ label= <children_1> ]',
@@ -145,9 +145,9 @@ def test_nodes_with_no_relationship_still_show_up_as_nodes():
     }, )
     dot = diagram(config, entities)
     assert dot == [
-        'Child_child1',
-        'Child_child2',
-        'Parent_ref',
+        'child_child1',
+        'child_child2',
+        'parent_ref',
     ]
 
 
@@ -167,9 +167,9 @@ def test_explicit_parent_child_relationship():
     )
     dot = diagram(config, entities)
     assert dot == [
-        'Child_child1',
-        'Child_child2',
-        'Parent_ref',
+        'child_child1',
+        'child_child2',
+        'parent_ref',
         'parent_ref->child_child1 [ label= <children_0> ]',
         'parent_ref->child_child2 [ label= <children_1> ]',
     ]
@@ -194,9 +194,9 @@ def test_combining_arrows_from_parent_child_relationship():
     # arrows left over after combining into bidirectional arrows are combined
     # based on sharing directed node pair.
     assert dot == [
-        'Child_child1',
-        'Child_child2',
-        'Parent_ref',
+        'child_child1',
+        'child_child2',
+        'parent_ref',
         'parent_ref->child_child1 [ label= <children_0<br/>pyref> ]',
         'parent_ref->child_child2 [ label= <children_1> ]',
     ]
