@@ -168,6 +168,16 @@ Q. You're doing it all wrong, you should use public interfaces to construct your
 A. I tend to agree with this advice, but it's still possible to end up with a
    scenario that's not what you intended.
 
+## Running tests / running mypy
+
+To run mypy, in the top level directory of the git project, run:
+
+    ./run_mypy.sh
+
+To run the tests, in the top level directory of the git project, run:
+
+    ./run_tests.sh
+
 ## To do
 
 I may well never do any of this but:
