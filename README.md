@@ -12,6 +12,20 @@ ImageMagick to display it.
 Here is the code to generate the diagram above:
 
 ```
+    class Parent:
+        def __init__(self, reference, children, pyref=None, matching=None, matching2=None):
+            self.reference = reference
+            self.children = children
+            self.pyref = pyref
+            self.matching = matching
+            self.matching2 = matching2
+
+
+    class Child:
+        def __init__(self, id, matching=None):
+            self.id = id
+            self.matching = matching
+
     child1 = Child("child1")
     child2 = Child("child2")
     parent = Parent("ref", [child1, child2], pyref=child1)
