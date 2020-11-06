@@ -4,8 +4,31 @@ This draws a nodes-and-edges diagram of the relationships between a set of
 object instances in a python program, to help you check whether your test setup
 code is correct.
 
+![Example](example.png)
+
 It uses `dot` from Graphviz to render the diagram to SVG, and `display` from
 ImageMagick to display it.
+
+Here is the code to generate the diagram above:
+
+```
+    child1 = Child("child1")
+    child2 = Child("child2")
+    parent = Parent("ref", [child1, child2], pyref=child1)
+
+    import fixturegraph
+    entities = [parent, child1, child2]
+    config = fixturegraph.Configuration(
+        id_attrs={
+            Parent: "reference",
+            Child: "id",
+        },
+        attrs_with_child_refs={
+            Parent: ["children", "pyref"],
+        },
+    )
+    fixturegraph.show_diagram(config, entities)
+```
 
 ## Why
 
