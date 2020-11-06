@@ -2,7 +2,7 @@ from typing import NamedTuple
 
 from dataclasses import dataclass
 import fixturegraph
-from fixturegraph._.diagram import Arrow, combine_arrows, diagram, make_arrows
+from fixturegraph._.diagram import combine_arrows, diagram, make_arrows
 
 
 @dataclass
