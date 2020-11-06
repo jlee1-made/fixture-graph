@@ -129,7 +129,7 @@ To use this you need Graphviz (the `dot` program in particular) and ImageMagick
 
 To install fixture-graph:
 
-    pip install git+https://github.com/jlee1-made/pytest-icdiff.git@master#egg=pytest-icdiff
+    pip install git+https://github.com/jlee1-made/fixture-graph.git@master#egg=fixturegraph
 
 ## How to use it
 
